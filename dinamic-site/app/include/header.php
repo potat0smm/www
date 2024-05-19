@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-4">
                 <h1>
-                    <a href="<?php echo BASE_URL?>">ChipTuning</a>
+                    <a href="<?php echo BASE_URL?>">IT BLOG</a>
                 </h1>
             </div>
             <nav class="col-8">
@@ -11,7 +11,6 @@
                     <li><a href="<?php echo BASE_URL?>">Главная</a></li>
                     <li><a href="<?php echo BASE_URL . 'about.php' ?>">О нас</a></li>
                     <li><a href="#">Услуги</a></li>
-
                     <li>
                         <?php if (isset($_SESSION['id'])): ?>
                             <a href="#">
@@ -33,7 +32,6 @@
                                 <li><a href="<?php echo BASE_URL . "reg.php";?>">Регистрация</a></li>
                             </ul>
                         <?php endif; ?>
-
                     </li>
                 </ul>
             </nav>

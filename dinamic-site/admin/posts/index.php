@@ -1,5 +1,8 @@
 <?php
-    session_start();
+    include("../../path.php");
+    include "../../app/controllers/posts.php";
+    global $posts;
+    global $postsAdm;
 ?>
 <!doctype html>
 <html lang="ru">
@@ -23,170 +26,43 @@
 
 <?php include ("../../app/include/header_admin.php"); ?>
 
-<!--блок карусели START-->
 <div class="container">
-    <div class="row">
-        <h2 class="slider-title">Почувствуй скорость</h2>
-    </div>
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <!--<div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>-->
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="assets/image/chip1.jpeg" class="d-block w-100" alt="...">
-                <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-                    <h5><a href="">First slide label</a></h5>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="assets/image/chip2.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-                    <h5><a href="">First slide label</a></h5>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="assets/image/chip3.png" class="d-block w-100" alt="...">
-                <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-                    <h5><a href="">First slide label</a></h5>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div>
-<!--блок каруселиEND-->
-<!--main-->
-<div class="container">
-    <div class="content row">
-        <!--main content-->
-        <div class="main-content col-md-9 col-12">
-            <h3>Последние публикации</h3>
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/image/chip3.png" alt="" class="img-thumbnail">
-                </div>
-                <div class="post_text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Чип чип чип чип чип чип чип чип чип чип...</a>
-                    </h3>
-                    <i class="far fa-user">Имя Автора</i>
-                    <i class="far fa-calendar">Mar 11, 2019</i>
-                    <p class="preview-text">
-                        Чип чип чип чип чип.
-                        Чип чип чип чип чип.
-                    </p>
-                </div>
+    <?php include ("../../app/include/sidebar-admin.php"); ?>
+
+    <div class="posts col-9">
+            <div class="button row">
+                <a href="<?php echo BASE_URL . "admin/posts/create.php";?>" class="col-2 btn btn-success">Создать</a>
+                <span class="col-1"></span>
+                <a href="<?php echo BASE_URL . "admin/posts/index.php";?>" class="col-3 btn btn-warning">Редактировать</a>
             </div>
 
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/image/chip3.png" alt="" class="img-thumbnail">
-                </div>
-                <div class="post_text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Чип чип чип чип чип чип чип чип чип чип...</a>
-                    </h3>
-                    <i class="far fa-user">Имя Автора</i>
-                    <i class="far fa-calendar">Mar 11, 2019</i>
-                    <p class="preview-text">
-                        Чип чип чип чип чип.
-                        Чип чип чип чип чип.
-                    </p>
-                </div>
+            <div class="row title-table">
+                <h2>Управление записями</h2>
+                <div class="col-1">ID</div>
+                <div class="col-3">Название</div>
+                <div class="col-2">Автор</div>
+                <div class="col-6">Управление</div>
             </div>
-
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/image/chip3.png" alt="" class="img-thumbnail">
-                </div>
-                <div class="post_text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Чип чип чип чип чип чип чип чип чип чип...</a>
-                    </h3>
-                    <i class="far fa-user">Имя Автора</i>
-                    <i class="far fa-calendar">Mar 11, 2019</i>
-                    <p class="preview-text">
-                        Чип чип чип чип чип.
-                        Чип чип чип чип чип.
-                    </p>
-                </div>
+            <?php foreach ($postsAdm as $key => $post):  ?>
+            <div class="row post">
+                <div class="id col-1"><?=$key + 1; ?></div>
+                <div class="title col-3"><?=$post['title']; ?></div>
+                <div class="author col-2"><?=$post['username']; ?></div>
+                <div class="red col-2"><a href="">Создать</a></div>
+                <div class="del col-2"><a href="">Удалить</a></div>
+                <?php if ($post['status']):?>
+                    <div class="status col-2"><a href="">в черновик</a></div>
+                <?php else: ?>
+                    <div class="status col-2"><a href="">опубликовать</a></div>
+                <?php endif;?>
             </div>
-
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/image/chip3.png" alt="" class="img-thumbnail">
-                </div>
-                <div class="post_text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Чип чип чип чип чип чип чип чип чип чип...</a>
-                    </h3>
-                    <i class="far fa-user">Имя Автора</i>
-                    <i class="far fa-calendar">Mar 11, 2019</i>
-                    <p class="preview-text">
-                        Чип чип чип чип чип.
-                        Чип чип чип чип чип.
-                    </p>
-                </div>
-            </div>
-
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/image/chip3.png" alt="" class="img-thumbnail">
-                </div>
-                <div class="post_text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Чип чип чип чип чип чип чип чип чип чип...</a>
-                    </h3>
-                    <i class="far fa-user">Имя Автора</i>
-                    <i class="far fa-calendar">Mar 11, 2019</i>
-                    <p class="preview-text">
-                        Чип чип чип чип чип.
-                        Чип чип чип чип чип.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-        <!--sidebar Content-->
-        <div class="sidebar col-md-3 col-12">
-            <div class="section search">
-                <h3>Поиск</h3>
-                <form action="/" method="post">
-                    <input type="text" name="search-term" class="text-input" placeholder="Введите искомое слово...">
-                </form>
-            </div>
-
-            <div class="section topics">
-                <h3>Категории</h3>
-                <ul>
-                    <li><a href="#">Услуга 1 </a> </li>
-                    <li><a href="#">Услуга 2</a> </li>
-                    <li><a href="#">Услуга 3</a> </li>
-                    <li><a href="#">Услуга 4</a> </li>
-                    <li><a href="#">Услуга 5</a> </li>
-                </ul>
-            </div>
-
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
-<!-- блок main END -->
 
 <!-- footer -->
-
-<?php include ("app/include/footer.php"); ?>
-
-
+<?php include ("../../app/include/footer.php"); ?>
 <!-- footer END -->
 
 

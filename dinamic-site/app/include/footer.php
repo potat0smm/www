@@ -4,14 +4,14 @@
     <div class="footer-content container">
         <div class="row">
             <div class="footer-section about col-md-4 col-12">
-                <h3 class="logo-text">Мой блог</h3>
+                <h3 class="logo-text">IT Блог</h3>
                 <p>
-                    У нас вы сможете сделать со своим автомобилем
-                    Все, что пожелаете.
+                    Тут вы найдете много полезных статье
+                    Приобритете новые навыки в IT
                 </p>
                 <div class="contact">
                     <span> <i class="fas fa-phone"> &nbsp; 123-456-789 </i> </span>
-                    <span> <i class="fas fa-envelope"></i> &nbsp; info@myblog.com </span>
+                    <span> <i class="fas fa-envelope"></i> &nbsp; info@itblog.com </span>
                 </div>
                 <div class="socials">
                     <a href="#"> <i class="fab fa-facebook"></i> </a>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="footer-bottom">
-            &copy; myblog.com | Designed by Morozov
+            &copy; IT Blog
         </div>
 
     </div>

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-4">
                 <h1>
-                    <a href="<?php echo BASE_URL?>">ChipTuning</a>
+                    <a href="<?php echo BASE_URL?>">IT BLOG</a>
                 </h1>
             </div>
             <nav class="col-8">
